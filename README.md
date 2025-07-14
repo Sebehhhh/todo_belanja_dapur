@@ -59,3 +59,122 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# To Do Belanja Dapur
+
+Aplikasi web sederhana untuk mengelola rencana dan realisasi belanja kebutuhan dapur. Dibuat dengan Laravel dan menggunakan database SQLite.
+
+## Fitur
+
+- ✅ Tambah dan hapus rencana belanja
+- ✅ Tabel dengan checkbox untuk menandai barang sudah dibeli
+- ✅ Coretan otomatis pada barang yang sudah dibeli
+- ✅ Statistik sederhana (sudah/belum dibeli)
+- ✅ Pencarian berdasarkan nama barang
+- ✅ Export laporan ke PDF
+- ✅ Tampilan clean dan responsif dengan Bootstrap
+
+## Tutorial Clone dan Setup
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Sebehhhh/todo_belanja_dapur.git
+cd todo_belanja_dapur
+```
+
+### 2. Install Dependencies
+
+```bash
+composer install
+```
+
+### 3. Setup Environment
+
+```bash
+cp .env.example .env
+```
+
+### 4. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Setup Database (SQLite)
+
+Aplikasi ini menggunakan SQLite untuk kemudahan setup. File database akan dibuat otomatis.
+
+```bash
+# Buat file database SQLite
+touch database/database.sqlite
+
+# Jalankan migration untuk membuat tabel
+php artisan migrate
+```
+
+### 6. Install Dependencies PDF (Jika belum)
+
+```bash
+composer require barryvdh/laravel-dompdf
+php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
+```
+
+### 7. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Aplikasi akan berjalan di: http://localhost:8000
+
+## Cara Penggunaan
+
+1. **Tambah Rencana Belanja**: Isi form di bagian atas halaman
+2. **Centang Barang**: Klik checkbox untuk menandai barang sudah dibeli
+3. **Cari Barang**: Gunakan fitur pencarian di atas tabel
+4. **Hapus Data**: Klik tombol "Hapus" pada baris yang ingin dihapus
+5. **Export PDF**: Klik tombol "Export PDF" untuk download laporan
+
+## Struktur Database
+
+Tabel `belanja`:
+- `id` - Primary key
+- `nama_barang` - Nama barang belanja
+- `jumlah_barang` - Jumlah barang
+- `jam_simpan` - Waktu rencana simpan
+- `jam_beli` - Waktu realisasi beli (nullable)
+- `status_sudah_dibeli` - Status sudah dibeli/belum
+- `created_at`, `updated_at` - Timestamp
+
+## Teknologi yang Digunakan
+
+- **Backend**: Laravel 11 (PHP)
+- **Database**: SQLite
+- **Frontend**: Bootstrap 5
+- **PDF**: DomPDF
+- **Bahasa**: Indonesia (penamaan tabel, variabel, komentar)
+
+## Troubleshooting
+
+### Error "Class Barryvdh\DomPDF\Facades\Pdf not found"
+```bash
+composer dump-autoload
+php artisan config:clear
+```
+
+### Error "no such table: belanjas"
+Pastikan model `Belanja` sudah memiliki properti `protected $table = 'belanja';`
+
+### Database tidak terbuat
+```bash
+php artisan migrate:fresh
+```
+
+## Kontribusi
+
+Silakan fork repository ini dan buat pull request untuk kontribusi.
+
+## Lisensi
+
+Open source - bebas digunakan untuk pembelajaran dan pengembangan.
